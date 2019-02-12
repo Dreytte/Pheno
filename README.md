@@ -1,1 +1,52 @@
 # Pheno
+
+library(car)
+library(GrapheR) # graphique en clic bouton
+library(lme4) # Modèle mixte généralisé
+library(nlme) # Modéle mixte général
+library(MuMIn)
+library(MASS)
+
+#Import fichier
+tab1 <- read.delim("tab11.txt")
+#déclare ce qui est dans la table
+attach(tab1)
+summary(tab1)
+
+# Est-ce que les bactéries symbiotiques qu'on a injecté ont une influence sur la taille?
+# Symbiotes: effet fixe, choix des chercheurs, ils vuent tester absolument ces bactéries
+# clones: Echantillonnage aléatoire de plusieurs génomes qui existent dans la nature : effet aléatoire
+# L'aléatoire va ajouter une variance interclone, ils partent tous d'une origine (x) différente
+
+par(mfrow=c(1,2))
+hist(AllBioLAI$LAI3rings)   
+qqnorm(AllBioLAI$LAI3rings) 
+qqline(AllBioLAI$LAI3rings) # Normale --> regression multiple
+
+par(mfrow=c(1,2))
+hist(AllBioLAI$LAI5rings)   
+qqnorm(AllBioLAI$LAI5rings) 
+qqline(AllBioLAI$LAI5rings) # Aléatoire --> non exploitable
+
+qqp(AllBioLAI$`Wet Biom`,"norm")é
+qqp(AllBioLAI$`Wet Biom`,"lnorm")
+variable<-AllBioLAI$`Wet Biom`
+gamma<-fitdistr(variable,"gamma")
+qqp(variable, "gamma", shape = gamma$estimate[[1]], rate = gamma$estimate[[2]])
+
+
+par(mfrow=c(1,2))
+hist(AllBioLAI$`Wet Biom`)   
+qqnorm(AllBioLAI$`Wet Biom`) 
+qqline(AllBioLAI$`Wet Biom`) # Gamma --> lien = inverse
+
+par(mfrow=c(1,2))
+hist(AllBioLAI$`Dry Biom`)   
+qqnorm(AllBioLAI$`Dry Biom`) 
+qqline(AllBioLAI$`Dry Biom`) # Gamma --> lien = inverse
+
+par(mfrow=c(1,2))
+hist(AllBioLAI$Height)   
+qqnorm(AllBioLAI$Height) 
+qqline(AllBioLAI$Height) # Binomial --> GLM, lien = 
+
