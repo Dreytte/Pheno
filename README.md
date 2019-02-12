@@ -29,6 +29,8 @@ variable<-AllBioLAI$`Wet Biom`
 gamma<-fitdistr(variable,"gamma")
 qqp(variable, "gamma", shape = gamma$estimate[[1]], rate = gamma$estimate[[2]])
 
+#test 2 ajout d'un comment
+
 par(mfrow=c(1,2))
 hist(AllBioLAI$`Wet Biom`)   
 qqnorm(AllBioLAI$`Wet Biom`) 
