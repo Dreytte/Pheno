@@ -13,11 +13,6 @@ tab1 <- read.delim("tab11.txt")
 attach(tab1)
 summary(tab1)
 
-# Est-ce que les bactéries symbiotiques qu'on a injecté ont une influence sur la taille?
-# Symbiotes: effet fixe, choix des chercheurs, ils vuent tester absolument ces bactéries
-# clones: Echantillonnage aléatoire de plusieurs génomes qui existent dans la nature : effet aléatoire
-# L'aléatoire va ajouter une variance interclone, ils partent tous d'une origine (x) différente
-
 par(mfrow=c(1,2))
 hist(AllBioLAI$LAI3rings)   
 qqnorm(AllBioLAI$LAI3rings) 
